@@ -135,7 +135,8 @@
 
 				<paper-chip-input-autocomplete id="autocompleteAdditionalItems" label="Search or add additional items (Enter) (Cannot be empty)"
 				 additional-items allow-duplicates required auto-validate error-message="needs some text!" closable></paper-chip-input-autocomplete>
-
+				
+				<paper-chip-input-autocomplete id="limitResultAutocomplete" limit-result="3" label="Search Item ... (max result is 3)" closable></paper-chip-input-autocomplete>
 			</template>
 		</demo-snippet>
 
@@ -192,6 +193,9 @@
 
 		let autocompleteAdditionalItems = document.getElementById('autocompleteAdditionalItems');
 		autocompleteAdditionalItems.source = states;
+
+		let limitResultAutocompleteElement = document.getElementById('limitResultAutocomplete');
+		limitResultAutocompleteElement.source = states;
 	});
 
 </script>

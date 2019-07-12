@@ -169,7 +169,7 @@ Custom property | Description | Default
  					*/
 					minSearchStringLength: {
 						type: Number,
-						value: 2
+						value: 1
 					},
 
 					/**
@@ -284,6 +284,13 @@ Custom property | Description | Default
 						type: Boolean,
 						value: false
 					},
+
+					/**
+					* Set a limit to the auto-completion result.
+					*/
+					limitResult: {
+						type: Number
+					},
 					_autoValidate: {
 						type: Boolean,
 						value: false
@@ -381,6 +388,7 @@ Custom property | Description | Default
 				}
 
 				if (this._inputValue.length >= this.minSearchStringLength) {
+					this._inputValue = this._getHashtagOnInputValue();
 					this._updatePaperListboxWidth();
 					this._filterItems();
 					this._autocompleteClass = "autocomplete";
@@ -399,9 +407,9 @@ Custom property | Description | Default
 				let filteredByString = this.source.filter(element => this._filterBySearchString(element));
 
 				if (filteredByString.length > 0 && this.items.length) {
-					this._filteredSource = filteredByString.filter(element => this._filterByExistingPaperChip(element));
+					this._filteredSource = this._getFiltredData(filteredByString.filter(element => this._filterByExistingPaperChip(element)));
 				} else {
-					this._filteredSource = filteredByString;
+					this._filteredSource = this._getFiltredData(filteredByString);
 				}
 			}
 
@@ -463,6 +471,17 @@ Custom property | Description | Default
 				}));
 			}
 
+			_getFiltredData(filtredData) {
+				return this.limitResult ? filtredData.slice(0, this.limitResult) : filtredData;
+			}
+
+			_getHashtagOnInputValue() {
+				if (this._inputValue.indexOf('#') === -1) {
+					this._inputValue = `#${this._inputValue}`;
+				}
+
+				return this._inputValue;
+			}
 		}
 		window.customElements.define(PaperChipInputAutocomplete.is, PaperChipInputAutocomplete);
 	</script>
