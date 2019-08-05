@@ -404,6 +404,11 @@ Custom property | Description | Default
 			}
 
 			_filterItems() {
+				if (this._inputValue.length < 2) {
+					this.set('_filteredSource', []);
+					return;
+				}
+
 				let filteredByString = this.source.filter(element => this._filterBySearchString(element));
 
 				if (filteredByString.length > 0 && this.items.length) {
