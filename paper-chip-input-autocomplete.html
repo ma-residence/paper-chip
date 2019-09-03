@@ -94,10 +94,50 @@ Custom property | Description | Default
 					-webkit-font-smoothing: antialiased;
 					font-size: var(--paper-chip-input-autocomplete-label-font-size, 13px);
 				}
+
+				--paper-font-caption: {
+					@apply --paper-chip-container-placeholder;
+				}
 			}
 
 			paper-chip {
 				@apply --paper-chip-close-label;
+			}
+
+			paper-material {
+				width: auto !important;
+			}
+
+			#paperInput {
+
+				--layout-center: {
+					display: flex;
+					flex-direction: column;
+				};
+
+				--paper-input-container-label: {
+					padding: 8px 9px 0;
+
+					@apply --paper-input-container-label-chip;
+				};
+
+				--paper-input-container-input: {
+					padding: 8px 9px 0;
+
+					@apply --paper-input-container-chip;
+				};
+
+				--paper-input-container-label-floating: {
+					display: none;
+				};
+
+				--paper-input-prefix: {
+					display: none;
+				};
+
+				--paper-font-caption: {
+					display: none;
+				}
 			}
 		</style>
 
@@ -276,7 +316,7 @@ Custom property | Description | Default
 					allowedPattern: {
 						type: String
 					},
-					
+
 					/**
 					* Set to true to prevent to change the input value.
 					*/
@@ -376,7 +416,7 @@ Custom property | Description | Default
 				if (this.items.length != 0) {
 					let lastItemIndex = this.items.length - 1;
 					let lastItemname = this.items[lastItemIndex];
-					
+
 					this.splice('items', -1, 1);
 					this._throwChipRemovedEvent(lastItemname);
 				}
